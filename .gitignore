@@ -3,7 +3,7 @@
 
 ### draw.io ###
 # Backup files
-*.bak
+*.drawio.bkp
 
 ### macOS ###
 # General
