@@ -2,10 +2,10 @@ data "http" "ip" {
   url = "https://checkip.amazonaws.com/"
 }
 
-resource "aws_security_group" "jumphostAccess" {
+resource "aws_security_group" "bastionAccess" {
   vpc_id      = var.vpc_id
-  name        = "${var.applicationName}-jumphost-access"
-  description = "Allow access to jumphost"
+  name        = "${var.applicationName}-bastion-access"
+  description = "Allow access to bastion host"
   ingress {
     description = "SSH"
     from_port   = 22
@@ -22,15 +22,15 @@ resource "aws_security_group" "jumphostAccess" {
   }
 }
 
-resource "aws_instance" "jumphost" {
+resource "aws_instance" "bastion" {
   ami           = "ami-0f5506a411a8dab18"
   instance_type = "t4g.nano"
 
   subnet_id                   = var.subnet_id
-  security_groups             = [aws_security_group.jumphostAccess.id]
+  security_groups             = [aws_security_group.bastionAccess.id]
   key_name                    = var.ssh_key_name
   associate_public_ip_address = true
   tags = {
-    Name = "${var.applicationName}-jumphost"
+    Name = "${var.applicationName}-bastion"
   }
 }

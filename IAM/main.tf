@@ -82,7 +82,7 @@ resource "aws_iam_group" "deployers" {
 }
 
 resource "aws_iam_group_policy_attachment" "beanstalkAdmin" {
-  group = aws_iam_group.deployers.name
+  group      = aws_iam_group.deployers.name
   policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess-AWSElasticBeanstalk"
 }
 

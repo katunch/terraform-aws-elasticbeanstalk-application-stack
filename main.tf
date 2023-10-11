@@ -29,10 +29,9 @@ module "ssh-key" {
   public_key_path = var.ssh_public_key_path
 }
 
-
 ## ============= Jumphost =============
-module "jumphost" {
-  source = "./jumphost"
+module "bastionhost" {
+  source = "./bastion-host"
 
   applicationName = var.applicationName
   vpc_id          = module.vpc.vpc_id
@@ -76,7 +75,6 @@ module "elasticbeanstalk" {
 
   depends_on = [module.database]
 }
-
 
 ## ============= IAM =============
 module "IAM" {

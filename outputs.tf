@@ -1,8 +1,8 @@
 output "Jumphost_IP" {
-  value = module.jumphost.public_ip
+  value = module.bastionhost.public_ip
 }
 output "Jumphost_Hostname" {
-  value = module.jumphost.public_dns
+  value = module.bastionhost.public_dns
 }
 
 output "RDS_HOSTNAME" {
