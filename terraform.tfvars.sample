@@ -1,0 +1,4 @@
+applicationName        = "[YOUR_APPLICATION_NAME]"
+applicationEnvironment = "[YOUR_APPLICATION_ENVIRONMENT]"
+dns_name               = "[FQDN_OF_YOUR_APPLICATION]"
+ssl_cert_arn           = "[ARN_OF_SSL_CERT]"
