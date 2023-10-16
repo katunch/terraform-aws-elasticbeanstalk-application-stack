@@ -43,3 +43,21 @@ output "AWS_SECRET_ACCESS_KEY" {
   value     = module.IAM.AWS_SECRET_ACCESS_KEY
   sensitive = true
 }
+
+output "opensearch_endpoint" {
+  value = module.opensearch.opensearch_endpoint
+}
+
+output "opensearch_dashboard_endpoint" {
+  value = module.opensearch.opensearch_dashboard_endpoint
+}
+
+output "opensearch_master_user" {
+  value     = module.opensearch.opensearch_master_user
+  sensitive = false
+}
+
+output "opensearch_master_password" {
+  value     = module.opensearch.opensearch_master_password
+  sensitive = true
+}

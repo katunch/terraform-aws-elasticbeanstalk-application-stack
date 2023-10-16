@@ -73,3 +73,19 @@ variable "eb_instance_type" {
   description = "Instance type"
   default     = "t4g.micro"
 }
+
+variable "opensearch_engine_version" {
+  type    = string
+  default = "OpenSearch_2.9"
+}
+variable "opensearch_instance_count" {
+  type    = number
+  default = 1
+}
+variable "opensearch_instance_type" {
+  type    = string
+  default = "t3.medium.search"
+}
+variable "opensearch_domain" {
+  type = string
+}

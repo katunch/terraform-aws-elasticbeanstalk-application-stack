@@ -29,7 +29,7 @@ module "ssh-key" {
   public_key_path = var.ssh_public_key_path
 }
 
-## ============= Jumphost =============
+## ============= Bastion Host =============
 module "bastionhost" {
   source = "./bastion-host"
 
@@ -37,6 +37,16 @@ module "bastionhost" {
   vpc_id          = module.vpc.vpc_id
   subnet_id       = module.vpc.public_subnets[0]
   ssh_key_name    = module.ssh-key.key_name
+}
+
+## ============= Opensearch =============
+module "opensearch" {
+  source = "./opensearch"
+
+  applicationName           = var.applicationName
+  vpc_id                    = module.vpc.vpc_id
+  opensearch_engine_version = var.opensearch_engine_version
+
 }
 
 ## ============= RDS =============
@@ -71,9 +81,12 @@ module "elasticbeanstalk" {
     RDS_USERNAME = module.database.rds_cluster_master_username
     RDS_PASSWORD = module.database.rds_cluster_master_password
     RDS_DB_NAME  = module.database.rds_cluster_database_name
+    OPENSEARCH_HOSTNAME = "https://${module.opensearch.opensearch_endpoint}"
+    OPENSEARCH_USERNAME = module.opensearch.opensearch_master_user
+    OPENSEARCH_PASSWORD = module.opensearch.opensearch_master_password
   }
 
-  depends_on = [module.database]
+  depends_on = [module.database, module.opensearch]
 }
 
 ## ============= IAM =============
