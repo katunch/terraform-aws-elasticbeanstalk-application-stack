@@ -54,3 +54,12 @@ variable "environment_variables" {
   type    = map(string)
   default = {}
 }
+
+variable "eb_settings" {
+  type = list(object({
+    namespace = string
+    name      = string
+    value     = string
+  }))
+  default = []
+}

@@ -286,6 +286,15 @@ resource "aws_elastic_beanstalk_environment" "default" {
       value     = setting.value
     }
   }
+
+  dynamic "setting" {
+    for_each = var.eb_settings
+    content {
+      namespace = setting.value.namespace
+      name      = setting.value.name
+      value     = setting.value.value
+    }
+  }
 }
 
 resource "aws_lb_listener" "https_redirect" {

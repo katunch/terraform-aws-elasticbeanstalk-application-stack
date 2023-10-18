@@ -76,11 +76,16 @@ module "elasticbeanstalk" {
   solution_stack_name = var.eb_solution_stack_name
   instance_type       = var.eb_instance_type
   max_instance_count  = 2
+  eb_settings = [{
+    namespace = "aws:elasticbeanstalk:container:tomcat:jvmoptions"
+    name      = "Xmx"
+    value     = "256m"
+  }]
   environment_variables = {
-    RDS_HOSTNAME = module.database.rds_cluster_endpoint
-    RDS_USERNAME = module.database.rds_cluster_master_username
-    RDS_PASSWORD = module.database.rds_cluster_master_password
-    RDS_DB_NAME  = module.database.rds_cluster_database_name
+    RDS_HOSTNAME        = module.database.rds_cluster_endpoint
+    RDS_USERNAME        = module.database.rds_cluster_master_username
+    RDS_PASSWORD        = module.database.rds_cluster_master_password
+    RDS_DB_NAME         = module.database.rds_cluster_database_name
     OPENSEARCH_HOSTNAME = "https://${module.opensearch.opensearch_endpoint}"
     OPENSEARCH_USERNAME = module.opensearch.opensearch_master_user
     OPENSEARCH_PASSWORD = module.opensearch.opensearch_master_password
